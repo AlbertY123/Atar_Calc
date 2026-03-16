@@ -1,0 +1,194 @@
+/* Make it look expensive on a phone. */
+
+:root{
+  --shadow: 0 22px 60px rgba(0,0,0,.18);
+  --shadow-soft: 0 10px 30px rgba(0,0,0,.12);
+}
+
+body{
+  min-height: 100vh;
+  background: #0b1020;
+  color: rgba(255,255,255,.92);
+}
+
+.bg-aurora{
+  position: fixed;
+  inset: -20vh -20vw;
+  z-index: -1;
+  background:
+    radial-gradient(closest-side at 20% 30%, rgba(0, 255, 170, .22), transparent 55%),
+    radial-gradient(closest-side at 80% 20%, rgba(139, 92, 246, .25), transparent 55%),
+    radial-gradient(closest-side at 70% 80%, rgba(59, 130, 246, .25), transparent 55%),
+    radial-gradient(closest-side at 15% 80%, rgba(244, 114, 182, .20), transparent 55%),
+    linear-gradient(180deg, #070a12, #0b1020 50%, #0a1224);
+  filter: saturate(1.1);
+}
+
+/* Navbar stays dark for contrast */
+.nav-glass{
+  backdrop-filter: blur(12px);
+  background: rgba(8, 12, 22, .62) !important;
+  border-bottom: 1px solid rgba(255,255,255,.10);
+}
+
+/* Light, readable cards */
+.hero,
+.glass-card{
+  border-radius: 18px;
+  background: rgba(255,255,255,.90);
+  border: 1px solid rgba(255,255,255,.55);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  color: #0b1020;
+}
+
+.glass-card{
+  box-shadow: var(--shadow-soft);
+}
+
+.icon-orb{
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(59,130,246,.18), rgba(139,92,246,.18));
+  border: 1px solid rgba(15,23,42,.10);
+  color: #0b1020;
+}
+
+.text-grad{
+  background: linear-gradient(90deg, #2563eb, #7c3aed, #059669);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Contrast handled via Bootstrap themes (dark page + light cards). */
+
+/* Form controls should look like a real app */
+textarea, input, select{
+  background: rgba(255,255,255,.98) !important;
+  border: 1px solid rgba(15,23,42,.16) !important;
+  color: #0b1020 !important;
+  color-scheme: light;
+}
+
+.form-control:focus,
+.form-select:focus{
+  border-color: rgba(59,130,246,.65) !important;
+  box-shadow: 0 0 0 .25rem rgba(59,130,246,.18) !important;
+}
+
+.btn-primary{
+  border: 0;
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
+  box-shadow: 0 10px 28px rgba(99,102,241,.25);
+}
+
+/* Subject rows */
+.subject-row-card{
+  border-radius: 16px;
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(15,23,42,.10);
+  box-shadow: 0 10px 22px rgba(15,23,42,.06);
+  padding: 12px;
+}
+
+@media (min-width: 768px){
+  .subject-row-card{ padding: 14px; }
+}
+
+.input-group-score .btn{
+  min-width: 44px;
+}
+
+.input-group-score .form-control{
+  font-weight: 700;
+}
+
+@media (max-width: 576px){
+  .hero{ padding: 18px !important; }
+  .glass-card{ padding: 16px !important; }
+  .display-6{ font-size: 1.7rem; }
+  .lead{ font-size: 1.05rem; }
+}
+
+/* Results */
+.result-hero .metric{
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(59,130,246,.10), rgba(124,58,237,.10));
+  border: 1px solid rgba(15,23,42,.10);
+  padding: 14px;
+  height: 100%;
+}
+
+.chart-card{
+  border-radius: 16px;
+  background: rgba(255,255,255,.96);
+  border: 1px solid rgba(15,23,42,.10);
+  padding: 12px;
+  height: 100%;
+}
+
+.result-hero .metric .label{
+  color: #475569;
+  font-size: .9rem;
+}
+
+.result-hero .metric .value{
+  font-weight: 750;
+  font-size: 2.1rem;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.result-hero .metric .hint{
+  color: #64748b;
+  font-size: .9rem;
+}
+
+/* Tom Select: make it blend with Bootstrap on light cards (and actually look good on mobile) */
+.ts-wrapper{
+  width: 100%;
+}
+
+.ts-control{
+  width: 100% !important;
+  min-height: 44px;
+  padding: .5rem .75rem !important;
+  border-radius: .8rem !important;
+  background: rgba(255,255,255,.98) !important;
+  border: 1px solid rgba(15,23,42,.16) !important;
+  box-shadow: none !important;
+}
+
+.ts-wrapper.single .ts-control:after{
+  border-color: rgba(15,23,42,.55) transparent transparent transparent !important;
+}
+
+.ts-control input{
+  color: #0b1020 !important;
+}
+
+.ts-control input::placeholder{
+  color: #64748b !important;
+  opacity: 1;
+}
+
+.ts-dropdown{
+  background: white !important;
+  border-color: rgba(15,23,42,.16) !important;
+  border-radius: .9rem;
+  overflow: hidden;
+}
+
+.ts-dropdown .option{ color: #0b1020 !important; padding: .55rem .75rem; }
+.ts-dropdown .active{ background: rgba(59,130,246,.10) !important; }
+
+.alert{
+  border-radius: 14px;
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(15,23,42,.10);
+  color: #0b1020;
+}

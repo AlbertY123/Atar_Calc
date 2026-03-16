@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VCE ATAR Predictor</title>
+
+  <!-- Bootstrap (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <!-- Tom Select (searchable selects) -->
+  <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.bootstrap5.min.css" rel="stylesheet">
+
+  <link href="{{ url_for('static', filename='style.css') }}?v={{ asset_version }}" rel="stylesheet">
+
+  <meta name="color-scheme" content="light dark">
+</head>
+<body data-bs-theme="dark">
+  <div class="bg-aurora"></div>
+
+  <nav class="navbar navbar-expand-lg navbar-dark nav-glass sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-semibold" href="/">
+        <i class="bi bi-graph-up-arrow"></i>
+        VCE ATAR Predictor
+      </a>
+      <div class="d-flex gap-2">
+        <a class="btn btn-sm btn-outline-light" href="/about" target="_blank" rel="noreferrer">
+          <i class="bi bi-info-circle"></i> About
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-4">
+    <section class="hero p-4 p-md-5 mb-4" data-bs-theme="light">
+      <div class="row align-items-center g-4">
+        <div class="col-12 col-lg-7">
+          <h1 class="display-6 fw-semibold mb-2">Predict your ATAR from your <span class="text-grad">predicted study scores</span></h1>
+          <p class="lead mb-3 text-secondary-emphasis">Select subjects by name (no codes), enter raw study scores, and get an approximate scaled aggregate + ATAR.</p>
+
+          <div class="d-flex flex-wrap gap-2">
+            <span class="badge rounded-pill text-bg-light"><i class="bi bi-file-earmark-text"></i> Uses VTAC public PDFs</span>
+            <span class="badge rounded-pill text-bg-light"><i class="bi bi-sliders"></i> Scaling interpolation</span>
+            <span class="badge rounded-pill text-bg-light"><i class="bi bi-lightning-charge"></i> Instant results</span>
+          </div>
+        </div>
+        <div class="col-12 col-lg-5">
+          <div class="glass-card p-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <div class="small text-secondary">Data year</div>
+                <div class="fw-semibold">2024 (VTAC scaling + aggregate→ATAR)</div>
+              </div>
+              <div class="icon-orb"><i class="bi bi-mortarboard"></i></div>
+            </div>
+            <hr class="my-3">
+            <div class="small text-secondary">
+              Tip: use 5–6 subjects for a realistic aggregate. One English-group subject is required for an official ATAR.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="glass-card p-3 p-md-4 mb-4" data-bs-theme="light">
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+        <div>
+          <h2 class="h4 mb-1">Your subjects</h2>
+          <div class="text-secondary">Add 4–6 subjects. Pick by name, then set your raw study score (0–50).</div>
+        </div>
+        <div class="d-flex gap-2">
+          <button id="btnExample" class="btn btn-outline-primary btn-sm"><i class="bi bi-magic"></i> Example</button>
+          <button id="btnReset" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
+        </div>
+      </div>
+
+      <div id="alertArea"></div>
+
+      <div id="rows" class="vstack gap-3"></div>
+
+      <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center">
+        <button id="btnAdd" class="btn btn-outline-secondary btn-sm"><i class="bi bi-plus-circle"></i> Add subject</button>
+        <div class="d-flex gap-2">
+          <button id="btnPredict" class="btn btn-primary"><i class="bi bi-stars"></i> Predict ATAR</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="result" class="glass-card p-3 p-md-4 mb-5 d-none" data-bs-theme="light"></section>
+
+    <footer class="text-secondary small pb-4">
+      <div class="d-flex flex-column flex-md-row gap-2 justify-content-between">
+        <div>
+          <b>Disclaimer:</b> approximation only. VTAC uses 2‑decimal scaling and cohort-based processes; public reports are rounded.
+        </div>
+        <div>
+          <span class="me-2">Built for localhost/Tailscale use.</span>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    window.STUDIES = {{ studies_json | safe }};
+    window.DEFAULT_ROWS = {{ default_rows_json | safe }};
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+  <script src="{{ url_for('static', filename='app.js') }}?v={{ asset_version }}"></script>
+</body>
+</html>
